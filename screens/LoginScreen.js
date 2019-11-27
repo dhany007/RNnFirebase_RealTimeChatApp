@@ -1,18 +1,21 @@
 import React, {Component} from 'react';
 import {
-  StyleSheet,
   Text,
   TouchableOpacity,
   Alert,
   View,
-  Container,
   TextInput,
   AsyncStorage,
 } from 'react-native';
 
+import firebase from 'firebase';
 import User from '../User';
+import styles from '../constants/styles';
 
-export default class Login extends Component {
+export default class LoginScreen extends Component {
+  static navigationOptions = {
+    header: null,
+  };
   state = {
     phone: '',
     name: '',
@@ -41,45 +44,38 @@ export default class Login extends Component {
       // save user data
       await AsyncStorage.setItem('userPhone', this.state.phone);
       User.phone = this.state.phone;
+      firebase
+        .database()
+        .ref('users/' + User.phone)
+        .set({name: this.state.name});
       this.props.navigation.navigate('App');
     }
   };
 
   render() {
     return (
-      <View>
-        <Container style={styles.container}>
-          <TextInput
-            placeholder="Phone number"
-            keyboardType="number-pad"
-            style={styles.input}
-            value={this.state.phone}
-            onChangeText={this.handleChange('phone')}
-          />
-          <TextInput
-            placeholder="Name"
-            style={styles.input}
-            value={this.state.name}
-            onChangeText={this.handleChange('name')}
-          />
-          <TouchableOpacity onPress={this.submitForm}>
-            <Text>Enter</Text>
-          </TouchableOpacity>
-        </Container>
+      <View style={styles.container}>
+        <View>
+          <Text style={styles.head}>WhatzUp</Text>
+        </View>
+        <TextInput
+          placeholder="Phone number"
+          keyboardType="number-pad"
+          style={styles.input}
+          value={this.state.phone}
+          onChangeText={this.handleChange('phone')}
+          rounded
+        />
+        <TextInput
+          placeholder="Name"
+          style={styles.input}
+          value={this.state.name}
+          onChangeText={this.handleChange('name')}
+        />
+        <TouchableOpacity onPress={this.submitForm}>
+          <Text>Enter</Text>
+        </TouchableOpacity>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItmes: 'center',
-  },
-  input: {
-    padding: 10,
-    borderWidth: 1,
-    marginBottom: 10,
-  },
-});
