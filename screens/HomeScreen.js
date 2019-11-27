@@ -9,9 +9,18 @@ import {
 } from 'react-native';
 import User from '../User';
 import firebase from 'firebase';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+
 export default class HomeScreen extends Component {
-  static navigationOptions = {
-    title: 'Chats',
+  static navigationOptions = ({navigation}) => {
+    return {
+      title: 'Chats',
+      headerRight: (
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+          <Icon name="user" size={25} color="#000" style={{marginRight: 15}} />
+        </TouchableOpacity>
+      ),
+    };
   };
 
   state = {

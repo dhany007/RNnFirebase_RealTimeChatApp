@@ -118,9 +118,9 @@ export default class ChatScreen extends Component {
   render() {
     let {height, width} = Dimensions.get('window');
     return (
-      <View>
+      <View style={{flex: 1}}>
         <FlatList
-          style={{padding: 10, height: height * 0.79}}
+          style={{padding: 10}}
           data={this.state.messageList}
           renderItem={this.renderRow}
           keyExtractor={(item, index) => index.toString()}
@@ -130,6 +130,7 @@ export default class ChatScreen extends Component {
             flexDirection: 'row',
             alignItems: 'center',
             marginHorizontal: 5,
+            marginTop: 'auto',
           }}>
           <TextInput
             style={styles.input}
