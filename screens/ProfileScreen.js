@@ -7,9 +7,13 @@ import {
   AsyncStorage,
   TouchableOpacity,
   Alert,
+  Image,
 } from 'react-native';
+
 import User from '../User';
 import firebase from 'firebase';
+
+const imgPP = require('../assets/img/user.png');
 
 export default class ProfileScreen extends Component {
   static navigationOptions = {
@@ -49,18 +53,53 @@ export default class ProfileScreen extends Component {
   render() {
     return (
       <View>
-        <Text> {User.phone} </Text>
-        <TextInput
-          value={this.state.name}
-          onChangeText={this.handleChange('name')}
-          style={{borderWidth: 1}}
-        />
-        <TouchableOpacity onPress={this.changeName}>
-          <Text>Change Name</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this._logOut}>
-          <Text>Logout</Text>
-        </TouchableOpacity>
+        <View style={{marginLeft: 20, marginRight: 20}}>
+          <View style={{alignItems: 'center'}}>
+            <Image source={imgPP} style={{width: 200, height: 200}} />
+          </View>
+          <View style={{marginBottom: 10}}>
+            <Text style={{fontWeight: 'bold'}}>Nomor Handphone</Text>
+            <Text style={{fontSize: 23, fontWeight: 'bold'}}>{User.phone}</Text>
+          </View>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderBottomColor: '#b6b6b6',
+              marginTop: 10,
+              marginBottom: 10,
+            }}
+          />
+          <View>
+            <Text style={{fontWeight: 'bold', marginBottom: 5}}>Nama</Text>
+            <TextInput
+              value={this.state.name}
+              onChangeText={this.handleChange('name')}
+              style={{
+                borderWidth: 1,
+                padding: 3,
+                borderRadius: 5,
+                fontSize: 20,
+                fontWeight: 'bold',
+              }}
+            />
+            <TouchableOpacity onPress={this.changeName}>
+              <Text style={{marginTop: 10}}>Change Name</Text>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderBottomColor: '#b6b6b6',
+              marginTop: 20,
+              marginBottom: 10,
+            }}
+          />
+          <View style={{marginTop: 10}}>
+            <TouchableOpacity onPress={this._logOut}>
+              <Text>Logout</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
     );
   }

@@ -16,9 +16,24 @@ export default class HomeScreen extends Component {
     return {
       title: 'Chats',
       headerRight: (
-        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-          <Icon name="user" size={25} color="#000" style={{marginRight: 15}} />
-        </TouchableOpacity>
+        <View style={{flexDirection: 'row'}}>
+          <TouchableOpacity onPress={() => navigation.navigate('Map')}>
+            <Icon
+              name="map-marker-alt"
+              size={25}
+              color="#000"
+              style={{marginRight: 20}}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+            <Icon
+              name="user"
+              size={25}
+              color="#000"
+              style={{marginRight: 15}}
+            />
+          </TouchableOpacity>
+        </View>
       ),
     };
   };
@@ -43,11 +58,6 @@ export default class HomeScreen extends Component {
       }
     });
   }
-
-  _logOut = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate('Auth');
-  };
 
   renderRow = ({item}) => {
     return (

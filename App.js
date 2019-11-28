@@ -9,12 +9,17 @@ import HomeScreen from './screens/HomeScreen';
 import AuthLoadingScreen from './screens/AuthLoadingScreen';
 import ChatScreen from './screens/ChatScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import MapScreen from './screens/MapScreen';
+import ProfilMateScreen from './screens/ProfilMateScreen';
 
 const AppStack = createStackNavigator({
   Home: HomeScreen,
   Chat: ChatScreen,
   Profile: ProfileScreen,
+  Map: MapScreen,
+  ProfileMate: ProfilMateScreen,
 });
+
 const AuthStack = createStackNavigator({Login: LoginScreen});
 
 export default createAppContainer(

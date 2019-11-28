@@ -9,6 +9,7 @@ export default class AuthLoadingScreen extends React.Component {
   componentDidMount() {
     this._bootstrapAsync();
   }
+
   UNSAFE_componentWillMount() {
     var firebaseConfig = {
       apiKey: 'AIzaSyCh5OJc42kcGNkKOdE-l0fy2gTvgemDgBE',

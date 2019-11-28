@@ -1,3 +1,5 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
 import {
   Text,
@@ -6,11 +8,13 @@ import {
   View,
   TextInput,
   AsyncStorage,
+  StyleSheet,
 } from 'react-native';
+
+import { Container, Header, Content, Button } from 'native-base';
 
 import firebase from 'firebase';
 import User from '../User';
-import styles from '../constants/styles';
 
 export default class LoginScreen extends Component {
   static navigationOptions = {
@@ -44,8 +48,7 @@ export default class LoginScreen extends Component {
       // save user data
       await AsyncStorage.setItem('userPhone', this.state.phone);
       User.phone = this.state.phone;
-      firebase
-        .database()
+      firebase.database()
         .ref('users/' + User.phone)
         .set({name: this.state.name});
       this.props.navigation.navigate('App');
@@ -59,7 +62,8 @@ export default class LoginScreen extends Component {
           <Text style={styles.head}>WhatzUp</Text>
         </View>
         <TextInput
-          placeholder="Phone number"
+          placeholder="Enter your phone number"
+          placeholderTextColor='#FBFBF8'
           keyboardType="number-pad"
           style={styles.input}
           value={this.state.phone}
@@ -67,15 +71,52 @@ export default class LoginScreen extends Component {
           rounded
         />
         <TextInput
-          placeholder="Name"
+          placeholder="Enter your name"
+          placeholderTextColor='#FBFBF8'
           style={styles.input}
           value={this.state.name}
           onChangeText={this.handleChange('name')}
         />
-        <TouchableOpacity onPress={this.submitForm}>
-          <Text>Enter</Text>
-        </TouchableOpacity>
+        <View style={styles.enter}>
+          <TouchableOpacity onPress={this.submitForm}>
+              <Text style={{color: '#FBFBF8'}}>Enter</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#1E1E2C',
+  },
+  input: {
+    padding: 10,
+    borderWidth: 1,
+    marginBottom: 10,
+    width: '90%',
+    borderRadius: 10,
+    borderColor: '#FBFBF8',
+    color: '#FBFBF8',
+  },
+  head: {
+    marginBottom: 50,
+    marginTop: -50,
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: '#FBFBF8',
+  },
+  enter: {
+    marginTop: 10,
+    width:'90%',
+    borderWidth: 1,
+    borderColor:'#FBFBF8',
+    padding: 10,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+});

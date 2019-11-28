@@ -9,15 +9,35 @@ import {
   FlatList,
   Dimensions,
   KeyboardAvoidingView,
+  StyleSheet,
 } from 'react-native';
 import User from '../User';
-import styles from '../constants/styles';
 import firebase from 'firebase';
+
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export default class ChatScreen extends Component {
   static navigationOptions = ({navigation}) => {
     return {
       title: navigation.getParam('name', null),
+      headerRight: (
+        <View>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('ProfileMate', {
+                name: navigation.getParam('name'),
+                phone: navigation.getParam('phone'),
+              })
+            }>
+            <Icon
+              name="user"
+              size={25}
+              color="#000"
+              style={{marginRight: 15}}
+            />
+          </TouchableOpacity>
+        </View>
+      ),
     };
   };
 
@@ -50,7 +70,6 @@ export default class ChatScreen extends Component {
 
   handleChange = key => val => {
     this.setState({[key]: val});
-    console.log(val);
   };
 
   convertTime = time => {
@@ -99,16 +118,17 @@ export default class ChatScreen extends Component {
       <View
         style={{
           flexDirection: 'row',
-          width: '60%',
+          width: '70%',
           alignSelf: item.from === User.phone ? 'flex-end' : 'flex-start',
           backgroundColor: item.from === User.phone ? '#00897b' : '#7cb342',
           borderRadius: 5,
-          marginBottom: 10,
+          marginBottom: 5,
         }}>
         <Text style={{color: '#fff', padding: 7, fontSize: 16}}>
           {item.message}
         </Text>
-        <Text style={{color: '#eee', padding: 3, fontSize: 12}}>
+        <Text
+          style={{color: '#eee', padding: 2, fontSize: 10, marginLeft: 'auto'}}>
           {this.convertTime(item.time)}
         </Text>
       </View>
@@ -116,6 +136,7 @@ export default class ChatScreen extends Component {
   };
 
   render() {
+    console.log(this.state.person.name);
     let {height, width} = Dimensions.get('window');
     return (
       <View style={{flex: 1}}>
@@ -139,10 +160,37 @@ export default class ChatScreen extends Component {
             onChangeText={this.handleChange('textMessage')}
           />
           <TouchableOpacity onPress={() => this.sendMessage()}>
-            <Text style={styles.btnText}>Send</Text>
+            {/* <Text style={styles.btnText}>Send</Text> */}
+            <Icon
+              name="arrow-circle-right"
+              size={30}
+              color="#000"
+              style={{marginLeft: 5}}
+            />
           </TouchableOpacity>
         </View>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  input: {
+    padding: 10,
+    borderWidth: 1,
+    marginBottom: 5,
+    width: '90%',
+    borderRadius: 10,
+  },
+  head: {
+    marginBottom: 50,
+    marginTop: -50,
+    fontSize: 25,
+    fontWeight: 'bold',
+  },
+});
