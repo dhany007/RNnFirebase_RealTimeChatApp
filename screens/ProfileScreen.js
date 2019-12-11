@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Alert,
   Image,
+  ScrollView,
 } from 'react-native';
 
 import User from '../User';
@@ -51,13 +52,14 @@ export default class ProfileScreen extends Component {
   };
 
   render() {
+    console.log(User);
     return (
-      <View>
+      <ScrollView>
         <View style={{marginLeft: 20, marginRight: 20}}>
-          <View style={{alignItems: 'center'}}>
+          <View style={{alignItems: 'center', marginTop: 20}}>
             <Image source={imgPP} style={{width: 200, height: 200}} />
           </View>
-          <View style={{marginBottom: 10}}>
+          <View style={{marginBottom: 10, marginTop: 20}}>
             <Text style={{fontWeight: 'bold'}}>Nomor Handphone</Text>
             <Text style={{fontSize: 23, fontWeight: 'bold'}}>{User.phone}</Text>
           </View>
@@ -90,17 +92,18 @@ export default class ProfileScreen extends Component {
             style={{
               borderBottomWidth: 1,
               borderBottomColor: '#b6b6b6',
-              marginTop: 20,
+              marginTop: 10,
               marginBottom: 10,
             }}
           />
+
           <View style={{marginTop: 10}}>
             <TouchableOpacity onPress={this._logOut}>
               <Text>Logout</Text>
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }

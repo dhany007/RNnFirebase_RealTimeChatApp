@@ -2,8 +2,14 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
+import {Header, Left, Title, Body, Button, Right} from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export default class MapScreen extends Component {
+  static navigationOptions = {
+    title: 'Maps',
+  };
+
   constructor() {
     super();
     this.state = {
@@ -24,7 +30,6 @@ export default class MapScreen extends Component {
   };
 
   render() {
-    console.log(this.state.location);
     return (
       <View style={styles.container}>
         <MapView
@@ -41,6 +46,7 @@ export default class MapScreen extends Component {
               latitude: this.state.location.latitude,
               longitude: this.state.location.longitude,
             }}
+            title="Kalai"
           />
         </MapView>
       </View>

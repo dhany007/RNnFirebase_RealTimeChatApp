@@ -5,11 +5,14 @@ import {
   View,
   TouchableOpacity,
   AsyncStorage,
+  Image,
   FlatList,
 } from 'react-native';
 import User from '../User';
 import firebase from 'firebase';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+
+const imgUser = require('./../assets/img/ppUser.png');
 
 export default class HomeScreen extends Component {
   static navigationOptions = ({navigation}) => {
@@ -64,7 +67,13 @@ export default class HomeScreen extends Component {
       <TouchableOpacity
         onPress={() => this.props.navigation.navigate('Chat', item)}
         style={{padding: 10, borderBottomColor: '#ccc', borderBottomWidth: 1}}>
-        <Text style={{fontSize: 20}}>{item.name}</Text>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Image
+            source={imgUser}
+            style={{width: 50, height: 50, marginLeft: 10}}
+          />
+          <Text style={{fontSize: 20, marginLeft: 10}}>{item.name}</Text>
+        </View>
       </TouchableOpacity>
     );
   };
@@ -72,6 +81,7 @@ export default class HomeScreen extends Component {
   render() {
     return (
       <View>
+        <View style={{marginBottom: 10}} />
         <FlatList
           data={this.state.users}
           renderItem={this.renderRow}

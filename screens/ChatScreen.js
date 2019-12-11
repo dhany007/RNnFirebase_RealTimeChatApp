@@ -120,15 +120,15 @@ export default class ChatScreen extends Component {
           flexDirection: 'row',
           width: '70%',
           alignSelf: item.from === User.phone ? 'flex-end' : 'flex-start',
-          backgroundColor: item.from === User.phone ? '#00897b' : '#7cb342',
+          backgroundColor: item.from === User.phone ? '#DCF8C6' : '#fff',
           borderRadius: 5,
           marginBottom: 5,
         }}>
-        <Text style={{color: '#fff', padding: 7, fontSize: 16}}>
+        <Text style={{color: '#000', padding: 7, fontSize: 16}}>
           {item.message}
         </Text>
         <Text
-          style={{color: '#eee', padding: 2, fontSize: 10, marginLeft: 'auto'}}>
+          style={{color: '#000', padding: 2, fontSize: 10, marginLeft: 'auto'}}>
           {this.convertTime(item.time)}
         </Text>
       </View>
@@ -139,35 +139,37 @@ export default class ChatScreen extends Component {
     console.log(this.state.person.name);
     let {height, width} = Dimensions.get('window');
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: '#1e1e2c'}}>
         <FlatList
           style={{padding: 10}}
           data={this.state.messageList}
           renderItem={this.renderRow}
           keyExtractor={(item, index) => index.toString()}
         />
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginHorizontal: 5,
-            marginTop: 'auto',
-          }}>
-          <TextInput
-            style={styles.input}
-            value={this.state.textMessage}
-            placeholder="Type message..."
-            onChangeText={this.handleChange('textMessage')}
-          />
-          <TouchableOpacity onPress={() => this.sendMessage()}>
-            {/* <Text style={styles.btnText}>Send</Text> */}
-            <Icon
-              name="arrow-circle-right"
-              size={30}
-              color="#000"
-              style={{marginLeft: 5}}
+        <View style={{backgroundColor: '#fff'}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginHorizontal: 5,
+              marginTop: 'auto',
+            }}>
+            <TextInput
+              style={styles.input}
+              value={this.state.textMessage}
+              placeholder="Type message..."
+              onChangeText={this.handleChange('textMessage')}
             />
-          </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.sendMessage()}>
+              {/* <Text style={styles.btnText}>Send</Text> */}
+              <Icon
+                name="arrow-circle-right"
+                size={30}
+                color="#000"
+                style={{marginLeft: 5}}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     );
@@ -181,11 +183,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   input: {
-    padding: 10,
+    padding: 7,
     borderWidth: 1,
     marginBottom: 5,
     width: '90%',
     borderRadius: 10,
+    marginTop: 5,
   },
   head: {
     marginBottom: 50,
