@@ -28,16 +28,16 @@ $ yarn start # start app
 ## UI
 - [x] Home:
 
-![home](/assets/6.png)
+![home](/assets/img/6.png)
 
 - [x] Chatting room:
 
-![listjob](/assets/7.png)
+![Chatting room](/assets/img/7.png)
 
 - [x] User Login:
 
-![login](/assets/5.png)
+![login](/assets/img/5.png)
 
 - [x] Maps:
 
-![adminpage](/assets/8.png)
+![Maps](/assets/img/8.png)
